@@ -14,7 +14,7 @@ template <typename Scalar>
 CostModelImpulseFrictionConeTpl<Scalar>::CostModelImpulseFrictionConeTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameFrictionCone& fref)
-    : Base(state, activation, boost::make_shared<ResidualModelContactFrictionCone>(state, fref.id, fref.cone, 0)),
+    : Baseboost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelContactFrictionCone>boost::make_shared<StateMultibody>(*state), fref.id, fref.cone, 0)),
       fref_(fref) {
   std::cerr << "Deprecated CostModelImpulseFrictionCone: Use ResidualModelContactFrictionCone with "
                "CostModelResidual class"
@@ -28,7 +28,7 @@ CostModelImpulseFrictionConeTpl<Scalar>::CostModelImpulseFrictionConeTpl(
 template <typename Scalar>
 CostModelImpulseFrictionConeTpl<Scalar>::CostModelImpulseFrictionConeTpl(boost::shared_ptr<StateMultibody> state,
                                                                          const FrameFrictionCone& fref)
-    : Base(state, boost::make_shared<ResidualModelContactFrictionCone>(state, fref.id, fref.cone, 0)), fref_(fref) {
+    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactFrictionCone>boost::make_shared<StateMultibody>(*state), fref.id, fref.cone, 0)), fref_(fref) {
   std::cerr << "Deprecated CostModelImpulseFrictionCone: Use ResidualModelContactFrictionCone with "
                "CostModelResidual class"
             << std::endl;

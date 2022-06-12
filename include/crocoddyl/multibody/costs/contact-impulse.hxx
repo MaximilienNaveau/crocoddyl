@@ -14,8 +14,8 @@ template <typename Scalar>
 CostModelContactImpulseTpl<Scalar>::CostModelContactImpulseTpl(boost::shared_ptr<StateMultibody> state,
                                                                boost::shared_ptr<ActivationModelAbstract> activation,
                                                                const FrameForce& fref)
-    : Base(state, activation,
-           boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, activation->get_nr(), 0)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, activation->get_nr(), 0)),
       fref_(fref) {
   std::cerr << "Deprecated CostModelContactImpulse: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
@@ -23,14 +23,14 @@ CostModelContactImpulseTpl<Scalar>::CostModelContactImpulseTpl(boost::shared_ptr
 template <typename Scalar>
 CostModelContactImpulseTpl<Scalar>::CostModelContactImpulseTpl(boost::shared_ptr<StateMultibody> state,
                                                                const FrameForce& fref, const std::size_t nr)
-    : Base(state, boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, nr, 0)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, nr, 0)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactImpulse: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
 
 template <typename Scalar>
 CostModelContactImpulseTpl<Scalar>::CostModelContactImpulseTpl(boost::shared_ptr<StateMultibody> state,
                                                                const FrameForce& fref)
-    : Base(state, boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, 6, 0)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, 6, 0)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactImpulse: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
 

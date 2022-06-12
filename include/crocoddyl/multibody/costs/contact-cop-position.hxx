@@ -14,8 +14,8 @@ template <typename _Scalar>
 CostModelContactCoPPositionTpl<_Scalar>::CostModelContactCoPPositionTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameCoPSupport& cref, const std::size_t nu)
-    : Base(state, activation,
-           boost::make_shared<ResidualModelContactCoPPosition>(state, cref.get_id(),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelContactCoPPosition>(boost::make_shared<StateMultibody>(*state), cref.get_id(),
                                                                CoPSupport(Matrix3s::Identity(), cref.get_box()), nu)),
       cop_support_(cref) {
   std::cerr << "Deprecated CostModelContactCoPPosition: Use ResidualModelContactCoPPosition with "
@@ -27,8 +27,8 @@ template <typename _Scalar>
 CostModelContactCoPPositionTpl<_Scalar>::CostModelContactCoPPositionTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameCoPSupport& cref)
-    : Base(state, activation,
-           boost::make_shared<ResidualModelContactCoPPosition>(state, cref.get_id(),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelContactCoPPosition>(boost::make_shared<StateMultibody>(*state), cref.get_id(),
                                                                CoPSupport(Matrix3s::Identity(), cref.get_box()))),
       cop_support_(cref) {
   std::cerr << "Deprecated CostModelContactCoPPosition: Use ResidualModelContactCoPPosition with "
@@ -40,10 +40,10 @@ template <typename _Scalar>
 CostModelContactCoPPositionTpl<_Scalar>::CostModelContactCoPPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                                         const FrameCoPSupport& cref,
                                                                         const std::size_t nu)
-    : Base(state,
+    : Base(boost::make_shared<StateMultibody>(*state),
            boost::make_shared<ActivationModelQuadraticBarrier>(
                ActivationBounds(VectorXs::Zero(4), std::numeric_limits<_Scalar>::max() * VectorXs::Ones(4))),
-           boost::make_shared<ResidualModelContactCoPPosition>(state, cref.get_id(),
+           boost::make_shared<ResidualModelContactCoPPosition>(boost::make_shared<StateMultibody>(*state), cref.get_id(),
                                                                CoPSupport(Matrix3s::Identity(), cref.get_box()), nu)),
       cop_support_(cref) {
   std::cerr << "Deprecated CostModelContactCoPPosition: Use ResidualModelContactCoPPosition with "
@@ -54,10 +54,10 @@ CostModelContactCoPPositionTpl<_Scalar>::CostModelContactCoPPositionTpl(boost::s
 template <typename _Scalar>
 CostModelContactCoPPositionTpl<_Scalar>::CostModelContactCoPPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                                         const FrameCoPSupport& cref)
-    : Base(state,
+    : Base(boost::make_shared<StateMultibody>(*state),
            boost::make_shared<ActivationModelQuadraticBarrier>(
                ActivationBounds(VectorXs::Zero(4), std::numeric_limits<_Scalar>::max() * VectorXs::Ones(4))),
-           boost::make_shared<ResidualModelContactCoPPosition>(state, cref.get_id(),
+           boost::make_shared<ResidualModelContactCoPPosition>(boost::make_shared<StateMultibody>(*state), cref.get_id(),
                                                                CoPSupport(Matrix3s::Identity(), cref.get_box()))),
       cop_support_(cref) {
   std::cerr << "Deprecated CostModelContactCoPPosition: Use ResidualModelContactCoPPosition with "

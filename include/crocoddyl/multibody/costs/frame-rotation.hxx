@@ -17,7 +17,7 @@ template <typename Scalar>
 CostModelFrameRotationTpl<Scalar>::CostModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                                              const FrameRotation& Rref, const std::size_t nu)
-    : Base(state, activation, boost::make_shared<ResidualModelFrameRotation>(state, Rref.id, Rref.rotation, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameRotation>(boost::make_shared<StateMultibody>(*state), Rref.id, Rref.rotation, nu)),
       Rref_(Rref) {
   std::cerr << "Deprecated CostModelFrameRotation: Use ResidualModelFrameRotation with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 3) {
@@ -30,7 +30,7 @@ template <typename Scalar>
 CostModelFrameRotationTpl<Scalar>::CostModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                                              const FrameRotation& Rref)
-    : Base(state, activation, boost::make_shared<ResidualModelFrameRotation>(state, Rref.id, Rref.rotation)),
+  : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameRotation>(boost::make_shared<StateMultibody>(*state), Rref.id, Rref.rotation)),
       Rref_(Rref) {
   std::cerr << "Deprecated CostModelFrameRotation: Use ResidualModelFrameRotation with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 3) {
@@ -42,14 +42,14 @@ CostModelFrameRotationTpl<Scalar>::CostModelFrameRotationTpl(boost::shared_ptr<S
 template <typename Scalar>
 CostModelFrameRotationTpl<Scalar>::CostModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                              const FrameRotation& Rref, const std::size_t nu)
-    : Base(state, boost::make_shared<ResidualModelFrameRotation>(state, Rref.id, Rref.rotation, nu)), Rref_(Rref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameRotation>(boost::make_shared<StateMultibody>(*state), Rref.id, Rref.rotation, nu)), Rref_(Rref) {
   std::cerr << "Deprecated CostModelFrameRotation: Use ResidualModelFrameRotation with CostModelResidual" << std::endl;
 }
 
 template <typename Scalar>
 CostModelFrameRotationTpl<Scalar>::CostModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                              const FrameRotation& Rref)
-    : Base(state, boost::make_shared<ResidualModelFrameRotation>(state, Rref.id, Rref.rotation)), Rref_(Rref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameRotation>(boost::make_shared<StateMultibody>(*state), Rref.id, Rref.rotation)), Rref_(Rref) {
   std::cerr << "Deprecated CostModelFrameRotation: Use ResidualModelFrameRotation with CostModelResidual" << std::endl;
 }
 

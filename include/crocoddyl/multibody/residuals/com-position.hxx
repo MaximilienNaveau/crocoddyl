@@ -14,12 +14,12 @@ namespace crocoddyl {
 template <typename Scalar>
 ResidualModelCoMPositionTpl<Scalar>::ResidualModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                                  const Vector3s& cref, const std::size_t nu)
-    : Base(state, 3, nu, true, false, false), cref_(cref) {}
+    : Base(boost::make_shared<StateMultibody>(*state), 3, nu, true, false, false), cref_(cref) {}
 
 template <typename Scalar>
 ResidualModelCoMPositionTpl<Scalar>::ResidualModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                                  const Vector3s& cref)
-    : Base(state, 3, true, false, false), cref_(cref) {}
+    : Base(boost::make_shared<StateMultibody>(*state), 3, true, false, false), cref_(cref) {}
 
 template <typename Scalar>
 ResidualModelCoMPositionTpl<Scalar>::~ResidualModelCoMPositionTpl() {}

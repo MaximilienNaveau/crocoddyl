@@ -14,7 +14,7 @@ namespace crocoddyl {
 
 template <typename Scalar>
 ResidualModelImpulseCoMTpl<Scalar>::ResidualModelImpulseCoMTpl(boost::shared_ptr<StateMultibody> state)
-    : Base(state, 3, 0, true, true, false), pin_model_(state->get_pinocchio()) {}
+    : Base(boost::make_shared<StateMultibody>(*state), 3, 0, true, true, false), pin_model_(boost::make_shared<typename StateMultibody::PinocchioModel>(*(state->get_pinocchio())) {}
 
 template <typename Scalar>
 ResidualModelImpulseCoMTpl<Scalar>::~ResidualModelImpulseCoMTpl() {}

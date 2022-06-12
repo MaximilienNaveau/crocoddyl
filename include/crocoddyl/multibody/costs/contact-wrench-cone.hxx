@@ -15,7 +15,7 @@ template <typename Scalar>
 CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameWrenchCone& fref, const std::size_t nu)
-    : Base(state, activation, boost::make_shared<ResidualModelContactWrenchCone>(state, fref.id, fref.cone, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelContactWrenchCone>(boost::make_shared<StateMultibody>(*state), fref.id, fref.cone, nu)),
       fref_(fref) {
   std::cerr << "Deprecated CostModelContactWrenchCone: Use ResidualModelContactWrenchCone with CostModelResidual"
             << std::endl;
@@ -25,7 +25,7 @@ template <typename Scalar>
 CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameWrenchCone& fref)
-    : Base(state, activation, boost::make_shared<ResidualModelContactWrenchCone>(state, fref.id, fref.cone)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelContactWrenchCone>(boost::make_shared<StateMultibody>(*state), fref.id, fref.cone)),
       fref_(fref) {
   std::cerr << "Deprecated CostModelContactWrenchCone:esidualModelContactWrenchCone with CostModelResidual"
             << std::endl;
@@ -34,7 +34,7 @@ CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(
 template <typename Scalar>
 CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(boost::shared_ptr<StateMultibody> state,
                                                                      const FrameWrenchCone& fref, const std::size_t nu)
-    : Base(state, boost::make_shared<ResidualModelContactWrenchCone>(state, fref.id, fref.cone, nu)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactWrenchCone>(boost::make_shared<StateMultibody>(*state), fref.id, fref.cone, nu)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactWrenchCone: Use ResidualModelContactWrenchCone with CostModelResidual"
             << std::endl;
 }
@@ -42,7 +42,7 @@ CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(boost::shar
 template <typename Scalar>
 CostModelContactWrenchConeTpl<Scalar>::CostModelContactWrenchConeTpl(boost::shared_ptr<StateMultibody> state,
                                                                      const FrameWrenchCone& fref)
-    : Base(state, boost::make_shared<ResidualModelContactWrenchCone>(state, fref.id, fref.cone)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactWrenchCone>(boost::make_shared<StateMultibody>(*state), fref.id, fref.cone)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactWrenchCone: Use ResidualModelContactWrenchCone with CostModelResidual"
             << std::endl;
 }

@@ -15,7 +15,7 @@ template <typename Scalar>
 ResidualModelFrameTranslationTpl<Scalar>::ResidualModelFrameTranslationTpl(boost::shared_ptr<StateMultibody> state,
                                                                            const pinocchio::FrameIndex id,
                                                                            const Vector3s& xref, const std::size_t nu)
-    : Base(state, 3, nu, true, false, false), id_(id), xref_(xref), pin_model_(state->get_pinocchio()) {
+    : Base(boost::make_shared<StateMultibody>(*state), 3, nu, true, false, false), id_(id), xref_(xref), pin_model_(state->get_pinocchio()) {
   if (static_cast<pinocchio::FrameIndex>(state->get_pinocchio()->nframes) <= id) {
     throw_pretty("Invalid argument: "
                  << "the frame index is wrong (it does not exist in the robot)");
@@ -26,7 +26,7 @@ template <typename Scalar>
 ResidualModelFrameTranslationTpl<Scalar>::ResidualModelFrameTranslationTpl(boost::shared_ptr<StateMultibody> state,
                                                                            const pinocchio::FrameIndex id,
                                                                            const Vector3s& xref)
-    : Base(state, 3, true, false, false), id_(id), xref_(xref), pin_model_(state->get_pinocchio()) {
+    : Base(boost::make_shared<StateMultibody>(*state), 3, true, false, false), id_(id), xref_(xref), pin_model_(state->get_pinocchio()) {
   if (static_cast<pinocchio::FrameIndex>(state->get_pinocchio()->nframes) <= id) {
     throw_pretty("Invalid argument: "
                  << "the frame index is wrong (it does not exist in the robot)");

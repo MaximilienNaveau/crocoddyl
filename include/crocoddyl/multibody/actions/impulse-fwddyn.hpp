@@ -141,7 +141,7 @@ class ActionModelImpulseFwdDynamicsTpl : public ActionModelAbstractTpl<_Scalar> 
   /**
    * @brief Return the Pinocchio model
    */
-  pinocchio::ModelTpl<Scalar>& get_pinocchio() const;
+  pinocchio::ModelTpl<Scalar>& get_pinocchio();
 
   /**
    * @brief Return the armature vector
@@ -186,7 +186,7 @@ class ActionModelImpulseFwdDynamicsTpl : public ActionModelAbstractTpl<_Scalar> 
  private:
   boost::shared_ptr<ImpulseModelMultiple> impulses_;  //!< Impulse model
   boost::shared_ptr<CostModelSum> costs_;             //!< Cost model
-  pinocchio::ModelTpl<Scalar>& pinocchio_;            //!< Pinocchio model
+  pinocchio::ModelTpl<Scalar> pinocchio_;             //!< Pinocchio model
   bool with_armature_;                                //!< Indicate if we have defined an armature
   VectorXs armature_;                                 //!< Armature vector
   Scalar r_coeff_;                                    //!< Restitution coefficient

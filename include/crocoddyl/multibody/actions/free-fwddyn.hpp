@@ -135,7 +135,7 @@ class DifferentialActionModelFreeFwdDynamicsTpl : public DifferentialActionModel
   /**
    * @brief Return the Pinocchio model
    */
-  pinocchio::ModelTpl<Scalar>& get_pinocchio() const;
+  pinocchio::ModelTpl<Scalar>& get_pinocchio();
 
   /**
    * @brief Return the armature vector
@@ -161,7 +161,7 @@ class DifferentialActionModelFreeFwdDynamicsTpl : public DifferentialActionModel
  private:
   boost::shared_ptr<ActuationModelAbstract> actuation_;  //!< Actuation model
   boost::shared_ptr<CostModelSum> costs_;                //!< Cost model
-  pinocchio::ModelTpl<Scalar>& pinocchio_;               //!< Pinocchio model
+  pinocchio::ModelTpl<Scalar> pinocchio_;                //!< Pinocchio model
   bool without_armature_;                                //!< Indicate if we have defined an armature
   VectorXs armature_;                                    //!< Armature vector
 };

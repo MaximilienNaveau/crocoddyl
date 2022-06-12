@@ -15,7 +15,7 @@ template <typename Scalar>
 ResidualModelFrameRotationTpl<Scalar>::ResidualModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                                      const pinocchio::FrameIndex id,
                                                                      const Matrix3s& Rref, const std::size_t nu)
-    : Base(state, 3, nu, true, false, false),
+    : Base(boost::make_shared<StateMultibody>(*state), 3, nu, true, false, false),
       id_(id),
       Rref_(Rref),
       oRf_inv_(Rref.transpose()),
@@ -30,7 +30,7 @@ template <typename Scalar>
 ResidualModelFrameRotationTpl<Scalar>::ResidualModelFrameRotationTpl(boost::shared_ptr<StateMultibody> state,
                                                                      const pinocchio::FrameIndex id,
                                                                      const Matrix3s& Rref)
-    : Base(state, 3, true, false, false),
+    : Base(boost::make_shared<StateMultibody>(*state), 3, true, false, false),
       id_(id),
       Rref_(Rref),
       oRf_inv_(Rref.transpose()),

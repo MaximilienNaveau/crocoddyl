@@ -178,7 +178,7 @@ class DifferentialActionModelContactFwdDynamicsTpl : public DifferentialActionMo
   /**
    * @brief Return the Pinocchio model
    */
-  pinocchio::ModelTpl<Scalar>& get_pinocchio() const;
+  pinocchio::ModelTpl<Scalar>& get_pinocchio();
 
   /**
    * @brief Return the armature vector
@@ -215,7 +215,7 @@ class DifferentialActionModelContactFwdDynamicsTpl : public DifferentialActionMo
   boost::shared_ptr<ActuationModelAbstract> actuation_;  //!< Actuation model
   boost::shared_ptr<ContactModelMultiple> contacts_;     //!< Contact model
   boost::shared_ptr<CostModelSum> costs_;                //!< Cost model
-  pinocchio::ModelTpl<Scalar>& pinocchio_;               //!< Pinocchio model
+  pinocchio::ModelTpl<Scalar>  pinocchio_;               //!< Pinocchio model
   bool with_armature_;                                   //!< Indicate if we have defined an armature
   VectorXs armature_;                                    //!< Armature vector
   Scalar JMinvJt_damping_;                               //!< Damping factor used in operational space inertia matrix

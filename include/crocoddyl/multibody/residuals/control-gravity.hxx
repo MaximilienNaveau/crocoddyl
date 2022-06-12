@@ -14,7 +14,7 @@ namespace crocoddyl {
 template <typename Scalar>
 ResidualModelControlGravTpl<Scalar>::ResidualModelControlGravTpl(boost::shared_ptr<StateMultibody> state,
                                                                  const std::size_t nu)
-    : Base(state, state->get_nv(), nu, true, false), pin_model_(*state->get_pinocchio()) {
+    : Base(boost::make_shared<StateMultibody>(*state), state->get_nv(), nu, true, false), pin_model_(*state->get_pinocchio()) {
   if (nu_ == 0) {
     throw_pretty("Invalid argument: "
                  << "it seems to be an autonomous system, if so, don't add "
@@ -24,7 +24,7 @@ ResidualModelControlGravTpl<Scalar>::ResidualModelControlGravTpl(boost::shared_p
 
 template <typename Scalar>
 ResidualModelControlGravTpl<Scalar>::ResidualModelControlGravTpl(boost::shared_ptr<StateMultibody> state)
-    : Base(state, state->get_nv(), state->get_nv(), true, false), pin_model_(*state->get_pinocchio()) {}
+    : Base(boost::make_shared<StateMultibody>(*state), state->get_nv(), state->get_nv(), true, false), pin_model_(*state->get_pinocchio()) {}
 
 template <typename Scalar>
 ResidualModelControlGravTpl<Scalar>::~ResidualModelControlGravTpl() {}

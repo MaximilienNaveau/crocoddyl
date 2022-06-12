@@ -13,7 +13,7 @@ namespace crocoddyl {
 
 template <typename Scalar>
 ContactModelNumDiffTpl<Scalar>::ContactModelNumDiffTpl(const boost::shared_ptr<Base>& model)
-    : Base(model->get_state(), model->get_nc(), model->get_nu()), model_(model) {
+  : Base(boost::make_shared<StateMultibody>(*(model->get_state())), model->get_nc(), model->get_nu()), model_(model) {
   disturbance_ = std::sqrt(2.0 * std::numeric_limits<Scalar>::epsilon());
 }
 

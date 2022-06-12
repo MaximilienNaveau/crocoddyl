@@ -206,7 +206,7 @@ void DifferentialActionModelFreeFwdDynamicsTpl<Scalar>::print(std::ostream& os) 
 }
 
 template <typename Scalar>
-pinocchio::ModelTpl<Scalar>& DifferentialActionModelFreeFwdDynamicsTpl<Scalar>::get_pinocchio() const {
+pinocchio::ModelTpl<Scalar>& DifferentialActionModelFreeFwdDynamicsTpl<Scalar>::get_pinocchio() {
   return pinocchio_;
 }
 

@@ -16,7 +16,7 @@ namespace crocoddyl {
 
 template <typename Scalar>
 ImpulseModel3DTpl<Scalar>::ImpulseModel3DTpl(boost::shared_ptr<StateMultibody> state, const std::size_t frame)
-    : Base(state, 3), frame_(frame) {}
+    : Base(boost::make_shared<StateMultibody>(*state), 3), frame_(frame) {}
 
 template <typename Scalar>
 ImpulseModel3DTpl<Scalar>::~ImpulseModel3DTpl() {}

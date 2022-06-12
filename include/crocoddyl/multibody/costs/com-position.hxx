@@ -15,7 +15,7 @@ template <typename Scalar>
 CostModelCoMPositionTpl<Scalar>::CostModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                          boost::shared_ptr<ActivationModelAbstract> activation,
                                                          const Vector3s& cref, const std::size_t nu)
-    : Base(state, activation, boost::make_shared<ResidualModelCoMPosition>(state, cref, nu)), cref_(cref) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelCoMPosition>(boost::make_shared<StateMultibody>(*state), cref, nu)), cref_(cref) {
   std::cerr << "Deprecated CostModelCoMPosition: Use ResidualModelCoMPosition with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 3) {
     throw_pretty("Invalid argument: "
@@ -27,7 +27,7 @@ template <typename Scalar>
 CostModelCoMPositionTpl<Scalar>::CostModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state,
                                                          boost::shared_ptr<ActivationModelAbstract> activation,
                                                          const Vector3s& cref)
-    : Base(state, activation, boost::make_shared<ResidualModelCoMPosition>(state, cref)), cref_(cref) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelCoMPosition>(boost::make_shared<StateMultibody>(*state), cref)), cref_(cref) {
   std::cerr << "Deprecated CostModelCoMPosition: Use ResidualModelCoMPosition with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 3) {
     throw_pretty("Invalid argument: "
@@ -38,13 +38,13 @@ CostModelCoMPositionTpl<Scalar>::CostModelCoMPositionTpl(boost::shared_ptr<State
 template <typename Scalar>
 CostModelCoMPositionTpl<Scalar>::CostModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state, const Vector3s& cref,
                                                          const std::size_t nu)
-    : Base(state, boost::make_shared<ResidualModelCoMPosition>(state, cref, nu)), cref_(cref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelCoMPosition>(boost::make_shared<StateMultibody>(*state), cref, nu)), cref_(cref) {
   std::cerr << "Deprecated CostModelCoMPosition: Use ResidualModelCoMPosition with CostModelResidual" << std::endl;
 }
 
 template <typename Scalar>
 CostModelCoMPositionTpl<Scalar>::CostModelCoMPositionTpl(boost::shared_ptr<StateMultibody> state, const Vector3s& cref)
-    : Base(state, boost::make_shared<ResidualModelCoMPosition>(state, cref)), cref_(cref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelCoMPosition>(boost::make_shared<StateMultibody>(*state), cref)), cref_(cref) {
   std::cerr << "Deprecated CostModelCoMPosition: Use ResidualModelCoMPosition with CostModelResidual" << std::endl;
 }
 

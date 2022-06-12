@@ -14,7 +14,7 @@ namespace crocoddyl {
 template <typename Scalar>
 ContactModelAbstractTpl<Scalar>::ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state, const std::size_t nc,
                                                          const std::size_t nu)
-    : state_(state), nc_(nc), nu_(nu), id_(0) {}
+  : state_(boost::make_shared<StateMultibody>(*state)), nc_(nc), nu_(nu), id_(0) {}
 
 template <typename Scalar>
 ContactModelAbstractTpl<Scalar>::ContactModelAbstractTpl(boost::shared_ptr<StateMultibody> state, const std::size_t nc)

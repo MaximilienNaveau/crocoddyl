@@ -158,7 +158,7 @@ void ActionModelImpulseFwdDynamicsTpl<Scalar>::print(std::ostream& os) const {
 }
 
 template <typename Scalar>
-pinocchio::ModelTpl<Scalar>& ActionModelImpulseFwdDynamicsTpl<Scalar>::get_pinocchio() const {
+pinocchio::ModelTpl<Scalar>& ActionModelImpulseFwdDynamicsTpl<Scalar>::get_pinocchio() {
   return pinocchio_;
 }
 

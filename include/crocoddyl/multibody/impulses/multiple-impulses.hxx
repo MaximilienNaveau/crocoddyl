@@ -13,7 +13,7 @@ namespace crocoddyl {
 
 template <typename Scalar>
 ImpulseModelMultipleTpl<Scalar>::ImpulseModelMultipleTpl(boost::shared_ptr<StateMultibody> state)
-    : state_(state), nc_(0), nc_total_(0) {}
+    : state_(boost::make_shared<StateMultibody>(*state)), nc_(0), nc_total_(0) {}
 
 template <typename Scalar>
 ImpulseModelMultipleTpl<Scalar>::~ImpulseModelMultipleTpl() {}

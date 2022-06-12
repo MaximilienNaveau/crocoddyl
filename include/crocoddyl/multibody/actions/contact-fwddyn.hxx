@@ -256,7 +256,7 @@ void DifferentialActionModelContactFwdDynamicsTpl<Scalar>::print(std::ostream& o
 }
 
 template <typename Scalar>
-pinocchio::ModelTpl<Scalar>& DifferentialActionModelContactFwdDynamicsTpl<Scalar>::get_pinocchio() const {
+pinocchio::ModelTpl<Scalar>& DifferentialActionModelContactFwdDynamicsTpl<Scalar>::get_pinocchio() {
   return pinocchio_;
 }
 

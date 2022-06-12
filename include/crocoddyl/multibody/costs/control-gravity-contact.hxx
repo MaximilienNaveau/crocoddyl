@@ -15,7 +15,7 @@ template <typename Scalar>
 CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const std::size_t nu)
-    : Base(state, activation, boost::make_shared<ResidualModelContactControlGrav>(state, nu)) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelContactControlGrav>(boost::make_shared<StateMultibody>(*state), nu)) {
   std::cerr << "Deprecated CostModelControlGravContact: Use ResidualModelContactControlGrav with "
                "CostModelResidual class"
             << std::endl;
@@ -28,7 +28,7 @@ CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(
 template <typename Scalar>
 CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation)
-    : Base(state, activation, boost::make_shared<ResidualModelContactControlGrav>(state)) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelContactControlGrav>(boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelControlGravContact: Use ResidualModelContactControlGrav with "
                "CostModelResidual class"
             << std::endl;
@@ -41,7 +41,7 @@ CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(
 template <typename Scalar>
 CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(boost::shared_ptr<StateMultibody> state,
                                                                        std::size_t nu)
-    : Base(state, boost::make_shared<ResidualModelContactControlGrav>(state, nu)) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactControlGrav>(boost::make_shared<StateMultibody>(*state), nu)) {
   std::cerr << "Deprecated CostModelControlGravContact: Use ResidualModelContactControlGrav with "
                "CostModelResidual class"
             << std::endl;
@@ -49,7 +49,7 @@ CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(boost::sh
 
 template <typename Scalar>
 CostModelControlGravContactTpl<Scalar>::CostModelControlGravContactTpl(boost::shared_ptr<StateMultibody> state)
-    : Base(state, boost::make_shared<ResidualModelContactControlGrav>(state)) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactControlGrav>(boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelControlGravContact: Use ResidualModelContactControlGrav with "
                "CostModelResidual class"
             << std::endl;

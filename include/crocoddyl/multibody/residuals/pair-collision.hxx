@@ -22,8 +22,8 @@ ResidualModelPairCollisionTpl<Scalar>::ResidualModelPairCollisionTpl(boost::shar
                                                                      boost::shared_ptr<GeometryModel> geom_model,
                                                                      const pinocchio::PairIndex pair_id,
                                                                      const pinocchio::JointIndex joint_id)
-    : Base(state, 3, nu, true, false, false),
-      pin_model_(*state->get_pinocchio()),
+    : Base(boost::make_shared<StateMultibody>(*state), 3, nu, true, false, false),
+      pin_model_(boost::make_shared<typename StateMultibody::PinocchioModel>(*(state->get_pinocchio()))),
       geom_model_(geom_model),
       pair_id_(pair_id),
       joint_id_(joint_id) {

@@ -17,7 +17,7 @@ namespace crocoddyl {
 template <typename Scalar>
 CostModelImpulseCoMTpl<Scalar>::CostModelImpulseCoMTpl(boost::shared_ptr<StateMultibody> state,
                                                        boost::shared_ptr<ActivationModelAbstract> activation)
-    : Base(state, activation, boost::make_shared<ResidualModelImpulseCoM>(state)) {
+    : Baseboost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelImpulseCoM>boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelImpulseCoM: Use ResidualModelImpulseCoM with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 3) {
     throw_pretty("Invalid argument: "
@@ -27,7 +27,7 @@ CostModelImpulseCoMTpl<Scalar>::CostModelImpulseCoMTpl(boost::shared_ptr<StateMu
 
 template <typename Scalar>
 CostModelImpulseCoMTpl<Scalar>::CostModelImpulseCoMTpl(boost::shared_ptr<StateMultibody> state)
-    : Base(state, boost::make_shared<ResidualModelImpulseCoM>(state)) {
+    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelImpulseCoM>boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelImpulseCoM: Use ResidualModelImpulseCoM with CostModelResidual" << std::endl;
 }
 

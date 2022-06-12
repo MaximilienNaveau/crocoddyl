@@ -15,7 +15,7 @@ template <typename Scalar>
 CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<StateMultibody> state,
                                                          boost::shared_ptr<ActivationModelAbstract> activation,
                                                          const std::size_t nu)
-    : Base(state, activation, boost::make_shared<ResidualModelControlGrav>(state, nu)) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelControlGrav>(boost::make_shared<StateMultibody>(*state), nu)) {
   std::cerr << "Deprecated CostModelControlGrav: Use ResidualModelControlGrav with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_nv()) {
     throw_pretty("Invalid argument: "
@@ -26,7 +26,7 @@ CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<State
 template <typename Scalar>
 CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<StateMultibody> state,
                                                          boost::shared_ptr<ActivationModelAbstract> activation)
-    : Base(state, activation, boost::make_shared<ResidualModelControlGrav>(state)) {
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelControlGrav>(boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelControlGrav: Use ResidualModelControlGrav with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_nv()) {
     throw_pretty("Invalid argument: "
@@ -36,13 +36,13 @@ CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<State
 
 template <typename Scalar>
 CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<StateMultibody> state, const std::size_t nu)
-    : Base(state, boost::make_shared<ResidualModelControlGrav>(state, nu)) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelControlGrav>(boost::make_shared<StateMultibody>(*state), nu)) {
   std::cerr << "Deprecated CostModelControlGrav: Use ResidualModelControlGrav with CostModelResidual" << std::endl;
 }
 
 template <typename Scalar>
 CostModelControlGravTpl<Scalar>::CostModelControlGravTpl(boost::shared_ptr<StateMultibody> state)
-    : Base(state, boost::make_shared<ResidualModelControlGrav>(state)) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelControlGrav>(boost::make_shared<StateMultibody>(*state))) {
   std::cerr << "Deprecated CostModelControlGrav: Use ResidualModelControlGrav with CostModelResidual" << std::endl;
 }
 

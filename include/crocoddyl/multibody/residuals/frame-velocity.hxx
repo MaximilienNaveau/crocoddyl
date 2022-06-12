@@ -19,7 +19,7 @@ ResidualModelFrameVelocityTpl<Scalar>::ResidualModelFrameVelocityTpl(boost::shar
                                                                      const Motion& velocity,
                                                                      const pinocchio::ReferenceFrame type,
                                                                      const std::size_t nu)
-    : Base(state, 6, nu, true, true, false),
+    : Base(boost::make_shared<StateMultibody>(*state), 6, nu, true, true, false),
       id_(id),
       vref_(velocity),
       type_(type),
@@ -35,7 +35,7 @@ ResidualModelFrameVelocityTpl<Scalar>::ResidualModelFrameVelocityTpl(boost::shar
                                                                      const pinocchio::FrameIndex id,
                                                                      const Motion& velocity,
                                                                      const pinocchio::ReferenceFrame type)
-    : Base(state, 6, true, true, false), id_(id), vref_(velocity), type_(type), pin_model_(state->get_pinocchio()) {
+    : Base(boost::make_shared<StateMultibody>(*state), 6, true, true, false), id_(id), vref_(velocity), type_(type), pin_model_(state->get_pinocchio()) {
   if (static_cast<pinocchio::FrameIndex>(state->get_pinocchio()->nframes) <= id) {
     throw_pretty("Invalid argument: "
                  << "the frame index is wrong (it does not exist in the robot)");

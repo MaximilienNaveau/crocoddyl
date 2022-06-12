@@ -15,8 +15,8 @@ template <typename Scalar>
 CostModelContactForceTpl<Scalar>::CostModelContactForceTpl(boost::shared_ptr<StateMultibody> state,
                                                            boost::shared_ptr<ActivationModelAbstract> activation,
                                                            const FrameForce& fref, const std::size_t nu)
-    : Base(state, activation,
-           boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, activation->get_nr(), nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, activation->get_nr(), nu)),
       fref_(fref) {
   std::cerr << "Deprecated CostModelContactForce: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
@@ -25,8 +25,8 @@ template <typename Scalar>
 CostModelContactForceTpl<Scalar>::CostModelContactForceTpl(boost::shared_ptr<StateMultibody> state,
                                                            boost::shared_ptr<ActivationModelAbstract> activation,
                                                            const FrameForce& fref)
-    : Base(state, activation,
-           boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, activation->get_nr())),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, activation->get_nr())),
       fref_(fref) {
   std::cerr << "Deprecated CostModelContactForce: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
@@ -42,14 +42,14 @@ CostModelContactForceTpl<Scalar>::CostModelContactForceTpl(boost::shared_ptr<Sta
 template <typename Scalar>
 CostModelContactForceTpl<Scalar>::CostModelContactForceTpl(boost::shared_ptr<StateMultibody> state,
                                                            const FrameForce& fref, const std::size_t nr)
-    : Base(state, boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, nr)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, nr)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactForce: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
 
 template <typename Scalar>
 CostModelContactForceTpl<Scalar>::CostModelContactForceTpl(boost::shared_ptr<StateMultibody> state,
                                                            const FrameForce& fref)
-    : Base(state, boost::make_shared<ResidualModelContactForce>(state, fref.id, fref.force, 6)), fref_(fref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelContactForce>(boost::make_shared<StateMultibody>(*state), fref.id, fref.force, 6)), fref_(fref) {
   std::cerr << "Deprecated CostModelContactForce: Use ResidualModelContactForce with CostModelResidual" << std::endl;
 }
 

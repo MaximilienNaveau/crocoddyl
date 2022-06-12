@@ -15,7 +15,7 @@ template <typename Scalar>
 ResidualModelFramePlacementTpl<Scalar>::ResidualModelFramePlacementTpl(boost::shared_ptr<StateMultibody> state,
                                                                        const pinocchio::FrameIndex id, const SE3& pref,
                                                                        const std::size_t nu)
-    : Base(state, 6, nu, true, false, false),
+    : Base(boost::make_shared<StateMultibody>(*state), 6, nu, true, false, false),
       id_(id),
       pref_(pref),
       oMf_inv_(pref.inverse()),
@@ -29,7 +29,7 @@ ResidualModelFramePlacementTpl<Scalar>::ResidualModelFramePlacementTpl(boost::sh
 template <typename Scalar>
 ResidualModelFramePlacementTpl<Scalar>::ResidualModelFramePlacementTpl(boost::shared_ptr<StateMultibody> state,
                                                                        const pinocchio::FrameIndex id, const SE3& pref)
-    : Base(state, 6, true, false, false),
+    : Base(boost::make_shared<StateMultibody>(*state), 6, true, false, false),
       id_(id),
       pref_(pref),
       oMf_inv_(pref.inverse()),
