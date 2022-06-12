@@ -17,7 +17,7 @@ template <typename Scalar>
 CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameTranslation& xref, const std::size_t nu)
-    : Baseboost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameTranslation>boost::make_shared<StateMultibody>(*state), xref.id, xref.translation, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameTranslation>(boost::make_shared<StateMultibody>(*state), xref.id, xref.translation, nu)),
       xref_(xref) {
   std::cerr << "Deprecated CostModelFrameTranslation: Use ResidualModelFrameTranslation with CostModelResidual"
             << std::endl;
@@ -31,7 +31,7 @@ template <typename Scalar>
 CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(
     boost::shared_ptr<StateMultibody> state, boost::shared_ptr<ActivationModelAbstract> activation,
     const FrameTranslation& xref)
-    : Baseboost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameTranslation>boost::make_shared<StateMultibody>(*state), xref.id, xref.translation)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelFrameTranslation>(boost::make_shared<StateMultibody>(*state), xref.id, xref.translation)),
       xref_(xref) {
   std::cerr << "Deprecated CostModelFrameTranslation: Use ResidualModelFrameTranslation with CostModelResidual"
             << std::endl;
@@ -44,7 +44,7 @@ CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(
 template <typename Scalar>
 CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(boost::shared_ptr<StateMultibody> state,
                                                                    const FrameTranslation& xref, const std::size_t nu)
-    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameTranslation>boost::make_shared<StateMultibody>(*state), xref.id, xref.translation, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameTranslation>(boost::make_shared<StateMultibody>(*state), xref.id, xref.translation, nu)),
       xref_(xref) {
   std::cerr << "Deprecated CostModelFrameTranslation: Use ResidualModelFrameTranslation with CostModelResidual"
             << std::endl;
@@ -53,7 +53,7 @@ CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(boost::shared
 template <typename Scalar>
 CostModelFrameTranslationTpl<Scalar>::CostModelFrameTranslationTpl(boost::shared_ptr<StateMultibody> state,
                                                                    const FrameTranslation& xref)
-    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameTranslation>boost::make_shared<StateMultibody>(*state), xref.id, xref.translation)), xref_(xref) {
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameTranslation>(boost::make_shared<StateMultibody>(*state), xref.id, xref.translation)), xref_(xref) {
   std::cerr << "Deprecated CostModelFrameTranslation: Use ResidualModelFrameTranslation with CostModelResidual"
             << std::endl;
 }

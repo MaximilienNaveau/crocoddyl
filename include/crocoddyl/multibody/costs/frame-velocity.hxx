@@ -19,8 +19,8 @@ template <typename Scalar>
 CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<StateMultibody> state,
                                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                                              const FrameMotion& vref, const std::size_t nu)
-    : Baseboost::make_shared<StateMultibody>(*state), activation,
-           boost::make_shared<ResidualModelFrameVelocity>boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelFrameVelocity>(boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference, nu)),
       vref_(vref) {
   std::cerr << "Deprecated CostModelFrameVelocity: Use ResidualModelFrameVelocity with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 6) {
@@ -33,8 +33,8 @@ template <typename Scalar>
 CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<StateMultibody> state,
                                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                                              const FrameMotion& vref)
-    : Baseboost::make_shared<StateMultibody>(*state), activation,
-           boost::make_shared<ResidualModelFrameVelocity>boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference)),
+    : Base(boost::make_shared<StateMultibody>(*state), activation,
+           boost::make_shared<ResidualModelFrameVelocity>(boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference)),
       vref_(vref) {
   std::cerr << "Deprecated CostModelFrameVelocity: Use ResidualModelFrameVelocity with CostModelResidual" << std::endl;
   if (activation_->get_nr() != 6) {
@@ -46,7 +46,7 @@ CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<S
 template <typename Scalar>
 CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<StateMultibody> state,
                                                              const FrameMotion& vref, const std::size_t nu)
-    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameVelocity>boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference, nu)),
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameVelocity>(boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference, nu)),
       vref_(vref) {
   std::cerr << "Deprecated CostModelFrameVelocity: Use ResidualModelFrameVelocity with CostModelResidual" << std::endl;
 }
@@ -54,7 +54,7 @@ CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<S
 template <typename Scalar>
 CostModelFrameVelocityTpl<Scalar>::CostModelFrameVelocityTpl(boost::shared_ptr<StateMultibody> state,
                                                              const FrameMotion& vref)
-    : Baseboost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameVelocity>boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference)),
+    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelFrameVelocity>(boost::make_shared<StateMultibody>(*state), vref.id, vref.motion, vref.reference)),
       vref_(vref) {
   std::cerr << "Deprecated CostModelFrameVelocity: Use ResidualModelFrameVelocity with CostModelResidual" << std::endl;
 }

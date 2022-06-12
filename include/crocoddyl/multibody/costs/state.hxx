@@ -15,7 +15,7 @@ template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                              const VectorXs& xref, const std::size_t nu)
-    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), xref, nu)), xref_(xref) {
+    : Base(state, activation, boost::make_shared<ResidualModelState>(state, xref, nu)), xref_(xref) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -24,7 +24,7 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = boost::make_shared(*(s->get_pinocchio()));
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
@@ -32,7 +32,7 @@ template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                              const VectorXs& xref)
-    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), xref)), xref_(xref) {
+    : Base(state, activation, boost::make_shared<ResidualModelState>(state, xref)), xref_(xref) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -41,14 +41,14 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
 template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              const VectorXs& xref, const std::size_t nu)
-    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), xref, nu)), xref_(xref) {
+    : Base(state, boost::make_shared<ResidualModelState>(state, xref, nu)), xref_(xref) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -57,14 +57,14 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
 template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              const VectorXs& xref)
-    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), xref)), xref_(xref) {
+    : Base(state, boost::make_shared<ResidualModelState>(state, xref)), xref_(xref) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -73,7 +73,7 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
@@ -81,7 +81,7 @@ template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              boost::shared_ptr<ActivationModelAbstract> activation,
                                              const std::size_t nu)
-    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), nu)), xref_(state->zero()) {
+    : Base(state, activation, boost::make_shared<ResidualModelState>(state, nu)), xref_(state->zero()) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -90,14 +90,14 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
 template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              const std::size_t nu)
-    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state), nu)), xref_(state->zero()) {
+    : Base(state, boost::make_shared<ResidualModelState>(state, nu)), xref_(state->zero()) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -106,14 +106,14 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
 template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state,
                                              boost::shared_ptr<ActivationModelAbstract> activation)
-    : Base(boost::make_shared<StateMultibody>(*state), activation, boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state))), xref_(state->zero()) {
+    : Base(state, activation, boost::make_shared<ResidualModelState>(state)), xref_(state->zero()) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -122,13 +122,13 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
 template <typename Scalar>
 CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::StateAbstract> state)
-    : Base(boost::make_shared<StateMultibody>(*state), boost::make_shared<ResidualModelState>(boost::make_shared<StateMultibody>(*state))), xref_(state->zero()) {
+    : Base(state, boost::make_shared<ResidualModelState>(state)), xref_(state->zero()) {
   std::cerr << "Deprecated CostModelState: Use ResidualModelState with CostModelResidual" << std::endl;
   if (activation_->get_nr() != state_->get_ndx()) {
     throw_pretty("Invalid argument: "
@@ -137,7 +137,7 @@ CostModelStateTpl<Scalar>::CostModelStateTpl(boost::shared_ptr<typename Base::St
   // Define the pinocchio model for the multibody state case
   const boost::shared_ptr<StateMultibody>& s = boost::dynamic_pointer_cast<StateMultibody>(state);
   if (s) {
-    pin_model_ = s->get_pinocchio();
+    pin_model_ = boost::make_shared<typename StateMultibody::PinocchioModel>(*(s->get_pinocchio()));
   }
 }
 
